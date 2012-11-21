@@ -131,16 +131,19 @@ module FIFO_nestedfor_TB();
         @(negedge clk) rst = 1;
         @(negedge clk) rst = 0;
 
+        // we write several words to the FIFO
         @(negedge clk) begin din=8'hA1; we = 1; end
         @(negedge clk) begin din=8'hA2; we = 1; end
         @(negedge clk) begin din=8'hA3; we = 1; end
         @(negedge clk) begin din=8'hA4; we = 1; end
         @(negedge clk) begin we = 0; end
 
+
+        // then read the various ordered pairs
         @(negedge clk) begin re = 1; end
         for (i=0;i<20;i=i+1) @(negedge clk);
 
-        // Wait 100 ns for global reset to finish
+        // finish the simulation...
         @(negedge clk) $finish ;
 
     end
