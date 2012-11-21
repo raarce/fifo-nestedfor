@@ -1,5 +1,29 @@
 `timescale 1ns / 1ps
 
+// Beware! This file contains both the module and the testbench
+
+// FIFO_nestedfor
+// This module acts like a FIFO when being written to.
+// When read it behaves as a nested for that produces all every
+// unique ordered pair of the elements that were written to the
+// FIFO.
+// Example:
+//   If you write the following data to the FIFO: A1, A2, A3, A4.
+//   The module will produce in its output the following
+//   ordered pairs:
+//   A1,A2
+//   A1,A3
+//   A1,A4
+//   A2,A3
+//   A2,A4
+//   A3,A4
+//
+// The valid_out signal indicates if the data that is being
+// output is valid.
+//
+// This module uses the generic_dpram module which is included in
+// the generic_dpram.v file.
+
 
 module FIFO_nestedfor(clk, rst, din,  we, re, dout, valid_out);
     parameter DW = 8;
